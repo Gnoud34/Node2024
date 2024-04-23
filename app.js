@@ -11,8 +11,8 @@ var app = express();
 
 
 var mongoose = require('mongoose');
-var url = "mongodb+srv://nguyenduongblue299:Koi12345678@cluster0.5whqr6w.mongodb.net/"
-mongoose.connect(url)
+var uri = "mongodb+srv://nguyenduongblue299:Koi12345678@cluster0.5whqr6w.mongodb.net/toyStoreATN"
+mongoose.connect(uri)
   .then(() => { console.log("Can connect to DB") })
   .catch(() => { console.log(err) });
 

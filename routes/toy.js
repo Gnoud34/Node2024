@@ -4,31 +4,23 @@ var router = express.Router();
 
 /* GET users listing. */
 
-router.get('/', (req, res) => {
-  ToyModel.find((err, data) => {
-    if (!err) {
+router.get('/', async (req, res) => {
+  let toys = await ToyModel.find({});
+  res.render('toy/index', { toys })
+})
 
-      res.render('toy/index', { toys: data })
-    }
-  })
+router.get('/home', async (req, res) => {
+  let toys = await ToyModel.find({});
+  res.render('toy/home', { toys })
 })
-router.get('/home', (req, res) => {
-  ToyModel.find((err, data) => {
-    if (!err) {
-      res.render('toy/home', { toys: data })
-    }
-  })
+
+router.get('/delete/:id', async (req, res) => {
+  await ToyModel.findByIdAndDelete(req.params.id);
+  console.log("Delete toy succeed !");
+  res.redirect("/toy");
 })
-router.get('/delete/:id', (req, res) => {
-  ToyModel.findByIdAndDelete(req.params.id, (err) => {
-    if (err) {
-      console.log(err)
-    } else {
-      console.log("Delete toy succeed !");
-      res.redirect("/toy");
-    }
-  })
-})
+
+
 
 //render ra form ADD
 router.get('/add', (req, res) => {
